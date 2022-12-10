@@ -13,9 +13,24 @@ namespace Assessment.Controllers
 		[HttpGet("~/listing")]
 		public Listing? GetListing(int id, string serverFilePath = listingsFilePath)
 		{
+			// Todo: Probably don't want to hard-code this here...
 			IEnumerable<Listing> listings = ReadListingsCsv(serverFilePath);
 
 			return listings.SingleOrDefault(listing => listing.Id == id);
+		}
+
+		[HttpGet("~/listings")]
+		public IEnumerable<Listing> GetListings(int pageNum = 1, int resultsPerPage = 2, string serverFilePath = listingsFilePath)
+		{
+			// Todo: Probably don't want to hard-code this here...
+			IEnumerable<Listing> listings = ReadListingsCsv(serverFilePath);
+
+			// Basic sanity limits for pagination (min 1 per page, max 10 per page, can't be on a page num below 1).
+			const int maxPageSize = 10;
+			pageNum = Math.Max(1, pageNum);
+			resultsPerPage = Math.Min(Math.Max(1, resultsPerPage), maxPageSize);
+
+			return listings.Skip(resultsPerPage * (pageNum - 1)).Take(resultsPerPage).ToList();
 		}
 
 		public static IEnumerable<Listing> ReadListingsCsv(string serverFilePath)
