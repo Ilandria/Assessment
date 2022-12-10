@@ -11,5 +11,7 @@ namespace Assessment.Data
 		}
 
 		public DbSet<Listing> Listings { get; set; } = default!;
+		public DbSet<CalendarEntry> Calendar { get; set; } = default!;
+		public DbSet<Review> Reviews { get; set; } = default!;
 	}
 }
