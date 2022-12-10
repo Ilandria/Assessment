@@ -74,6 +74,32 @@ namespace Assessment.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Listings");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Enjoy Queen Anne Living",
+                            ListingUrl = "https://www.airbnb.com/rooms/241032,20160104002432,2016-01-04,Stylish Queen Anne Apartment",
+                            Name = "Queen Anne Apartment",
+                            PropertyType = "apartment"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Enjoy craftmanship",
+                            ListingUrl = "https://www.airbnb.com/rooms/278830,20160104002432,2016-01-04,Charming craftsman 3 bdm house",
+                            Name = "Charming craftsman",
+                            PropertyType = "apartment"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "RVezy is awesome!",
+                            ListingUrl = "https://www.airbnb.com/rooms/1909058,20160104002432,2016-01-04,Queen Anne Private Bed and Bath",
+                            Name = "Queen Anne Private",
+                            PropertyType = "house"
+                        });
                 });
 
             modelBuilder.Entity("Assessment.Models.Review", b =>

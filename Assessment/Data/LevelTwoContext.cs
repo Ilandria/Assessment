@@ -1,4 +1,5 @@
 ﻿using Assessment.Models;
+using Assessment.Utils;
 using Microsoft.EntityFrameworkCore;
 
 namespace Assessment.Data
@@ -10,8 +11,17 @@ namespace Assessment.Data
 		{
 		}
 
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+			// Data seeding reference: https://learn.microsoft.com/en-us/ef/core/modeling/data-seeding
+			// Side-note: EF Core is cool!
+			modelBuilder.Entity<Listing>().HasData(CsvUtils.ReadListingsCsv(CsvUtils.listingsFilePath));
+		}
+
 		public DbSet<Listing> Listings { get; set; } = default!;
+
 		public DbSet<CalendarEntry> Calendar { get; set; } = default!;
+
 		public DbSet<Review> Reviews { get; set; } = default!;
 	}
 }

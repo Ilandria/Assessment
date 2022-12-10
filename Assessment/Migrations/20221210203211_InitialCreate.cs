@@ -57,6 +57,21 @@ namespace Assessment.Migrations
                 {
                     table.PrimaryKey("PK_Reviews", x => x.Id);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Listings",
+                columns: new[] { "Id", "Description", "ListingUrl", "Name", "PropertyType" },
+                values: new object[] { 1, "Enjoy Queen Anne Living", "https://www.airbnb.com/rooms/241032,20160104002432,2016-01-04,Stylish Queen Anne Apartment", "Queen Anne Apartment", "apartment" });
+
+            migrationBuilder.InsertData(
+                table: "Listings",
+                columns: new[] { "Id", "Description", "ListingUrl", "Name", "PropertyType" },
+                values: new object[] { 2, "Enjoy craftmanship", "https://www.airbnb.com/rooms/278830,20160104002432,2016-01-04,Charming craftsman 3 bdm house", "Charming craftsman", "apartment" });
+
+            migrationBuilder.InsertData(
+                table: "Listings",
+                columns: new[] { "Id", "Description", "ListingUrl", "Name", "PropertyType" },
+                values: new object[] { 3, "RVezy is awesome!", "https://www.airbnb.com/rooms/1909058,20160104002432,2016-01-04,Queen Anne Private Bed and Bath", "Queen Anne Private", "house" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
