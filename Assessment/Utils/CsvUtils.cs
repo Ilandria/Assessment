@@ -4,6 +4,7 @@ using System.Diagnostics;
 
 namespace Assessment.Utils
 {
+	// Consolidated here due to being used in multiple places. Note: Only use this for data seeding to avoid conflicts!
 	public static class CsvUtils
 	{
 		public static IEnumerable<Model> ReadCsv<Model>(Func<string[], int, Model> dtoConverter, string serverFilePath)
