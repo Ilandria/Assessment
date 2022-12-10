@@ -32,7 +32,11 @@ public static class ListingsEndpoints
 				return Results.NotFound();
 			}
 
-			// Todo: Update model properties here.
+			// Todo: Is there a way to hide the visibility of the primary key (Listing.Id) from Swagger schema docs?
+			foundModel.ListingUrl = $"{listing.ListingUrl}";
+			foundModel.Name = $"{listing.Name}";
+			foundModel.Description = $"{listing.Description}";
+			foundModel.PropertyType = $"{listing.PropertyType}";
 
 			await db.SaveChangesAsync();
 
@@ -53,6 +57,12 @@ public static class ListingsEndpoints
 			if (await db.Listings.FindAsync(Id) is Listing listing)
 			{
 				db.Listings.Remove(listing);
+
+				// Do we want to delete review/calendar entries related to the listing, or keep them for historical purposes? Assuming delete for now...
+				// Todo: A bit of research says that RemoveRange loads the entire table into memory. Definitely not sustainable, but this solution is simple for now.
+				db.Reviews.RemoveRange(db.Reviews.Where(review => review.ListingId == listing.Id));
+				db.Calendar.RemoveRange(db.Calendar.Where(calendarEntry => calendarEntry.ListingId == listing.Id));
+
 				await db.SaveChangesAsync();
 				return Results.Ok(listing);
 			}
