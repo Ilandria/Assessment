@@ -15,7 +15,9 @@ namespace Assessment.Data
 		{
 			// Data seeding reference: https://learn.microsoft.com/en-us/ef/core/modeling/data-seeding
 			// Side-note: EF Core is cool!
-			modelBuilder.Entity<Listing>().HasData(CsvUtils.ReadListingsCsv(CsvUtils.listingsFilePath));
+			modelBuilder.Entity<Listing>().HasData(CsvUtils.ReadListingsCsv());
+			modelBuilder.Entity<CalendarEntry>().HasData(CsvUtils.ReadCalendarCsv());
+			modelBuilder.Entity<Review>().HasData(CsvUtils.ReadReviewsCsv());
 		}
 
 		public DbSet<Listing> Listings { get; set; } = default!;

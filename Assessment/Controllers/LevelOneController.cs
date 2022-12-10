@@ -12,19 +12,19 @@ namespace Assessment.Controllers
 		// Todo: Come back and add tests after level 2.
 
 		[HttpGet("~/listing")]
-		public Listing? GetListing(int id, string serverFilePath = CsvUtils.listingsFilePath)
+		public Listing? GetListing(int id)
 		{
 			// Todo: Probably don't want to hard-code this here...
-			IEnumerable<Listing> listings = CsvUtils.ReadListingsCsv(serverFilePath);
+			IEnumerable<Listing> listings = CsvUtils.ReadListingsCsv();
 
 			return listings.SingleOrDefault(listing => listing.Id == id);
 		}
 
 		[HttpGet("~/listings")]
-		public IEnumerable<Listing> GetListings(int pageNum = 1, int resultsPerPage = 2, string? propertyType = null, string serverFilePath = CsvUtils.listingsFilePath)
+		public IEnumerable<Listing> GetListings(int pageNum = 1, int resultsPerPage = 2, string? propertyType = null)
 		{
 			// Todo: Probably don't want to hard-code this here...
-			IEnumerable<Listing> listings = CsvUtils.ReadListingsCsv(serverFilePath);
+			IEnumerable<Listing> listings = CsvUtils.ReadListingsCsv();
 
 			// Basic filtering by property type. This lets us use one endpoint for both cases pretty intuitively.
 			if (!string.IsNullOrWhiteSpace(propertyType))
