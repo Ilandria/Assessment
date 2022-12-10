@@ -10,6 +10,7 @@ namespace Assessment.Controllers
 	{
 		private const string listingsFilePath = "./CSV/listings.csv";
 
+		[HttpGet("~/listing")]
 		public Listing? GetListing(int id, string serverFilePath = listingsFilePath)
 		{
 			IEnumerable<Listing> listings = ReadListingsCsv(serverFilePath);
