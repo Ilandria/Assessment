@@ -8,6 +8,15 @@ namespace Assessment.Controllers
 	[ApiController]
 	public class LevelOneController : ControllerBase
 	{
+		private const string listingsFilePath = "./CSV/listings.csv";
+
+		public Listing? GetListing(int id, string serverFilePath = listingsFilePath)
+		{
+			IEnumerable<Listing> listings = ReadListingsCsv(serverFilePath);
+
+			return listings.SingleOrDefault(listing => listing.Id == id);
+		}
+
 		public static IEnumerable<Listing> ReadListingsCsv(string serverFilePath)
 		{
 			List<Listing> listings = new();
