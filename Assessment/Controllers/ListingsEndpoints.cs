@@ -33,6 +33,7 @@ public static class ListingsEndpoints
 			}
 
 			// Todo: Is there a way to hide the visibility of the primary key (Listing.Id) from Swagger schema docs?
+			// Todo: The default json Swagger generates causes fields to be set to "string". Probably want to handle that somehow...
 			foundModel.ListingUrl = $"{listing.ListingUrl}";
 			foundModel.Name = $"{listing.Name}";
 			foundModel.Description = $"{listing.Description}";
