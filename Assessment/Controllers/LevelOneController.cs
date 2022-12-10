@@ -28,8 +28,15 @@ namespace Assessment.Controllers
 
 					if (fields != null)
 					{
-						// Todo: Parse things!
-						//listings.Add();
+						// Todo: This assumes the CSV only contains valid formatting, deal with errors later if I have time.
+						listings.Add(new Listing()
+						{
+							Id = int.Parse(fields[0]),
+							ListingUrl = fields[1],
+							Name = fields[2],
+							Description = fields[3],
+							PropertyType = fields[4]
+						});
 					}
 				}
 			}
