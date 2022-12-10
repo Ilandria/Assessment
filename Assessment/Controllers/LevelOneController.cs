@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Assessment.Controllers
 {
+	// Note: This does not use the DB connection that was created in level two. Each endpoint call reads the CSV from disk.
+
 	// This controller naming is just for clarity on the test.
 	[Route("api/[controller]")]
 	[ApiController]
