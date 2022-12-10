@@ -6,7 +6,7 @@ namespace Assessment.Utils
 {
 	public static class CsvUtils
 	{
-		public static IEnumerable<Model> ReadCsv<Model>(Func<string[], Model> dtoConverter, string serverFilePath)
+		public static IEnumerable<Model> ReadCsv<Model>(Func<string[], int, Model> dtoConverter, string serverFilePath)
 		{
 			Debug.Assert(dtoConverter != null);
 
@@ -29,7 +29,7 @@ namespace Assessment.Utils
 					if (fields != null)
 					{
 						// Delegating parsing to the caller since this is now used for multiple model types.
-						entries.Add(dtoConverter(fields));
+						entries.Add(dtoConverter(fields, entries.Count + 1));
 					}
 				}
 			}
@@ -48,7 +48,7 @@ namespace Assessment.Utils
 		{
 			const string listingsFilePath = "./CSV/listings.csv";
 
-			return ReadCsv(fields =>
+			return ReadCsv((fields, rowNum) =>
 			{
 				// Todo: This assumes the CSV only contains specific formatting, deal with errors later if I have time.
 				return new Listing()
@@ -66,7 +66,7 @@ namespace Assessment.Utils
 		{
 			const string calendarFilePath = "./CSV/calendar.csv";
 
-			return ReadCsv(fields =>
+			return ReadCsv((fields, rowNum) =>
 			{
 				// Todo: This assumes the CSV only contains specific formatting, deal with errors later if I have time.
 				return new CalendarEntry()
@@ -74,7 +74,8 @@ namespace Assessment.Utils
 					ListingId = int.Parse(fields[0]),
 					Date = DateTime.Parse(fields[1]).Date,
 					Available = bool.Parse(fields[2]),
-					Price = float.Parse(fields[3].Trim('$'))
+					Price = float.Parse(fields[3].Trim('$')),
+					Id = rowNum
 				};
 			}, calendarFilePath);
 		}
@@ -83,7 +84,7 @@ namespace Assessment.Utils
 		{
 			const string reviewsFilePath = "./CSV/reviews.csv";
 
-			return ReadCsv(fields =>
+			return ReadCsv((fields, rowNum) =>
 			{
 				// Todo: This assumes the CSV only contains specific formatting, deal with errors later if I have time.
 				return new Review()
