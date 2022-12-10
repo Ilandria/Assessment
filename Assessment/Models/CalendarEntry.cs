@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Assessment.Models
 {
@@ -13,8 +14,8 @@ namespace Assessment.Models
 
 		public float Price { get; set; }
 
-		// Todo: Make sure it properly sets the primary key in the DB to this instead of ListingId.
 		[Key]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int Id { get; set; }
 	}
 }

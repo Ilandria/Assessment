@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Assessment.Models
 {
@@ -7,8 +8,8 @@ namespace Assessment.Models
 		// Keeping the order the same as how the fields appear in the CSV file for safety.
 		public int ListingId { get; set; }
 
-		// Todo: Make sure it properly sets the primary key in the DB to this instead of ListingId.
 		[Key]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int Id { get; set; }
 
 		public DateTime Date { get; set; }

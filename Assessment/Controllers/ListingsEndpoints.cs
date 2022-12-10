@@ -14,18 +14,18 @@ public static class ListingsEndpoints
 		})
 		.WithName("GetAllListings");
 
-		routes.MapGet("/api/listing/{id}", async (int Id, LevelTwoContext db) =>
+		routes.MapGet("/api/listing/{id}", async (int id, LevelTwoContext db) =>
 		{
-			return await db.Listings.FindAsync(Id)
+			return await db.Listings.FindAsync(id)
 				is Listing model
 					? Results.Ok(model)
 					: Results.NotFound();
 		})
 		.WithName("GetListingById");
 
-		routes.MapPut("/api/listing/{id}", async (int Id, Listing listing, LevelTwoContext db) =>
+		routes.MapPut("/api/listing/{id}", async (int id, Listing listing, LevelTwoContext db) =>
 		{
-			var foundModel = await db.Listings.FindAsync(Id);
+			var foundModel = await db.Listings.FindAsync(id);
 
 			if (foundModel is null)
 			{
@@ -52,9 +52,9 @@ public static class ListingsEndpoints
 		})
 		.WithName("CreateListing");
 
-		routes.MapDelete("/api/listing/{id}", async (int Id, LevelTwoContext db) =>
+		routes.MapDelete("/api/listing/{id}", async (int id, LevelTwoContext db) =>
 		{
-			if (await db.Listings.FindAsync(Id) is Listing listing)
+			if (await db.Listings.FindAsync(id) is Listing listing)
 			{
 				db.Listings.Remove(listing);
 
