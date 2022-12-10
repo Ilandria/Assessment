@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Assessment.Models;
 using Microsoft.EntityFrameworkCore;
-using Assessment.Models;
 
 namespace Assessment.Data
 {
-    public class LevelTwoContext : DbContext
-    {
-        public LevelTwoContext (DbContextOptions<LevelTwoContext> options)
-            : base(options)
-        {
-        }
+	// Same with the LevelOneController, this is just named this way for clarity on the assessment.
+	public class LevelTwoContext : DbContext
+	{
+		public LevelTwoContext(DbContextOptions<LevelTwoContext> options) : base(options)
+		{
+		}
 
-        public DbSet<Assessment.Models.Listing> Listing { get; set; } = default!;
-    }
+		public DbSet<Listing> Listings { get; set; } = default!;
+	}
 }
