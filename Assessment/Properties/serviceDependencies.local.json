@@ -1,9 +1,8 @@
 {
   "dependencies": {
-    "mssql1": {
-      "secretStore": null,
+    "mssql2": {
       "type": "mssql.local",
-      "connectionId": "AssessmentDB"
+      "connectionId": "ConnectionStrings:LevelTwoContext"
     }
   }
 }
